@@ -1,7 +1,7 @@
 # Using Mongodb
 
 
-mongDB_v1
+mongoDB_v1
 Connecting OUr Database with the Express App
 
 ```
