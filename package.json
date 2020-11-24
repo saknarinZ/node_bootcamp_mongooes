@@ -1,0 +1,26 @@
+{
+  "name": "natours",
+  "version": "1.0.0",
+  "description": "leaning node , express and mongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "start:prod": "SET NODE_ENV=production && nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saknarinZ/node-bootcamp.git"
+  },
+  "author": "Saknarin Schedtmann",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saknarinZ/node-bootcamp/issues"
+  },
+  "homepage": "https://github.com/saknarinZ/node-bootcamp#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.15",
+    "morgan": "^1.10.0"
+  }
+}
