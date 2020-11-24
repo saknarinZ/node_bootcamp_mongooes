@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const Tour = require('./../models/tourModel')
 
 exports.checkBody = (req, res, next) => {
