@@ -5,20 +5,35 @@ dotenv.config({ path: './config.env' });
 const app = require('./app');
 
 const DB = process.env.DATABASE.replace('<PASSWORD>',
- process.env.DATABASE_PASSWORD);
+  process.env.DATABASE_PASSWORD);
 
 mongoose
-//   .connect(process.env.DATABASE_LOCAL, {
+  //   .connect(process.env.DATABASE_LOCAL, {
   .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true 
   })
-  .then(() => console.log('DB connection successful!')
-  );
+  .then(() => console.log('DB connection successful!'));
 
-const port =  process.env.PORT || 3000;
+const tourSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'A tour must have a name'],
+    unique: true
+  },
+  rating: Number,
+  Price: {
+    type: Number,
+    required: [true, 'A tour must have a price']
+  }
+});
+
+const tour = mongoose.model('Tour', tourSchema);
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log(`app runing on port ${port}...`);
+  console.log(`app runing on port ${port}...`);
 });
 
