@@ -23,3 +23,9 @@ Aonther Way of Creating Documents
 
 mongoDB_v6
 Updating Documents
+
+mongoDB_v7
+Reading Documents
+
+mongoDB_v8
+Deleteing Documents
