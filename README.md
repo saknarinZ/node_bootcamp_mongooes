@@ -20,3 +20,6 @@ Refactoring for MVC
 
 mongoDB_v5
 Aonther Way of Creating Documents
+
+mongoDB_v6
+Updating Documents
