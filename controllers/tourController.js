@@ -30,7 +30,7 @@ exports.getTour = async (req, res) => {
         res.status(200).json({
             status: 'success',
             data: {
-                tour // ข้อมูลจากการขค้นหา
+                tour
             }
         });
     } catch (err) {
@@ -81,10 +81,19 @@ exports.updateTour = async (req, res) => {
     }
 }
 
-exports.deleteTour = (req, res) => {
-    // 204 NO Cantent
-    res.status(204).json({
-        status: 'seccess',
-        data: null
-    })
+exports.deleteTour = async (req, res) => {
+    try {
+         const tour = await Tour.findByIdAndDelete(req.params.id)
+        // 204 NO Cantent
+        res.status(204).json({
+            status: 'seccess',
+            data: null
+        })
+    } catch (err) {
+            res.status(400).json({
+                status: 'fail',
+                message: err
+            })
+    }
+
 }
