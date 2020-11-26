@@ -6,16 +6,16 @@ exports.aliasTopTours = (req, res, next) => {
     req.query.sort = '-ratingsAverage,price';
     req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
     next();
-  };
+};
 
 exports.getAllTours = async (req, res) => {
     try {
         // EXECUTE QUERY
         const features = new APIFeatures(Tour.find(), req.query)
-        .filter()
-        .sort()
-        .limitFields()
-        .paginate();
+            .filter()
+            .sort()
+            .limitFields()
+            .paginate();
         const tours = await features.query;
 
 
@@ -109,4 +109,41 @@ exports.deleteTour = async (req, res) => {
         })
     }
 
+}
+
+exports.getTourStats = async (req, res) => {
+    try {
+        const stata = await Tour.aggregate([
+            {
+                $match: { ratingsAverage: { $gte: 4.5 } }
+            },
+            {
+                $group: {
+                    _id: {$toUpper: '$difficulty'},
+                    numTours: { $sum: 1 },
+                    numRatings: { $sum: '$ratingsQuantity' },
+                    avgRating: { $avg: '$ratingsAverage' },
+                    avgPrice: { $avg: '$price' },
+                    minPrice: { $min: '$price' },
+                    maxPrice: { $max: '$price' }
+                }
+            },
+            {
+                $sort: { avgPrice: 1}
+            },
+        ]);
+
+        res.status(200).json({
+            status: 'seccess',
+            data: {
+                stata
+            }
+        })
+
+    } catch (err) {
+        res.status(400).json({
+            status: 'fail',
+            message: err
+        })
+    }
 }
