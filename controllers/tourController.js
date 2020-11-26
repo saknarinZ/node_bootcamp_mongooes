@@ -1,5 +1,6 @@
 const { match } = require('assert');
 const fs = require('fs');
+const { Query } = require('mongoose');
 const Tour = require('./../models/tourModel')
 
 
@@ -27,6 +28,14 @@ exports.getAllTours = async (req, res) => {
             // sort('price ratingsAverages')
         } else {
             query = query.sort('-createdAt');
+        }
+
+        // 3) Field limiting
+        if(req.query.fields){
+            const fields = req.query.fields.split(',').join(' ')
+            query = query.select(fields);
+        } else {
+            query = query.select('-__v');
         }
 
         // EXECUTE QUERY
