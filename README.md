@@ -60,3 +60,7 @@ Aggregation Pipeline: Matching and Grouping
 
 mongoDB_v18
 Aggregation Pipeline: Unwinding ang Projecting
+
+mongoDB_v19
+Virtual properties
+
