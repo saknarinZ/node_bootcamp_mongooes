@@ -3,6 +3,12 @@ const fs = require('fs');
 const { Query } = require('mongoose');
 const Tour = require('./../models/tourModel')
 
+exports.aliasTopTours = (req, res, next) => {
+    req.query.limit = '5';
+    req.query.sort = '-ratingsAverage, price',
+    req.query.fields = 'name,price,ratingsAverage,summaty,difficulty';
+    next();
+}
 
 
 exports.getAllTours = async (req, res) => {
@@ -19,10 +25,10 @@ exports.getAllTours = async (req, res) => {
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
 
-        let query =  Tour.find(JSON.parse(queryStr));
+        let query = Tour.find(JSON.parse(queryStr));
 
         // 2) Sorting
-        if (req.query.sort){
+        if (req.query.sort) {
             const sortBy = req.query.sort.split(',').join(' ');
             query = query.sort(sortBy)
             // sort('price ratingsAverages')
@@ -31,7 +37,7 @@ exports.getAllTours = async (req, res) => {
         }
 
         // 3) Field limiting
-        if(req.query.fields){
+        if (req.query.fields) {
             const fields = req.query.fields.split(',').join(' ')
             query = query.select(fields);
         } else {
@@ -45,9 +51,9 @@ exports.getAllTours = async (req, res) => {
 
         quety = query.skip(skip).limit(limit);
 
-        if(req.query.page){
+        if (req.query.page) {
             const numTours = await Tour.countDocuments();
-            if(skip >= numTours) throw new Error('This page does not exists')
+            if (skip >= numTours) throw new Error('This page does not exists')
         }
         // EXECUTE QUERY
         const tours = await query;
