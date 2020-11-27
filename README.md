@@ -78,3 +78,6 @@ Aggregation Middleware
 
 mongoDB_v23
 Data Validation: Built-ln Validators
+
+mongoDB_v24
+Data Validation: Custom Validators
