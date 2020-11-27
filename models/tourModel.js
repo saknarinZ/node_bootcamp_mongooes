@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const tourSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A tour must have a name'],
     unique: true,
-    trim: true  
+    trim: true
   },
+  slug: String,
   duration: {
     type: Number,
     required: [true, 'A tour must heve a duration']
@@ -35,7 +37,7 @@ const tourSchema = new mongoose.Schema({
   summary: {
     type: String,
     trim: true,
-    required: [true, 'A tour must heve a desctiption']  
+    required: [true, 'A tour must heve a desctiption']
   },
   description: {
     type: String,
@@ -43,7 +45,7 @@ const tourSchema = new mongoose.Schema({
   },
   imageCover: {
     type: String,
-    required:[true, 'A tour must heve a cover image']
+    required: [true, 'A tour must heve a cover image']
   },
   images: [String],
   createdAt: {
@@ -52,15 +54,34 @@ const tourSchema = new mongoose.Schema({
     select: false
   },
   startDates: [Date]
-},{
-  toJSON: { virtuals: true},
-  toObject: { virtuals: true},
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
 });
 
-tourSchema.virtual('durationWeeks').get(function(){
+tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7
 })
+
+// DOCUMENT MIDDLEWARE: run before .save() and .craate()
+tourSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, {lower: true});
+  next();
+  // console.log(this);
+});
+
+// tourSchema.pre('save', function (next) {
+//   console.log('Will save document');
+//   next();
+// });
+
+
+// tourSchema.post('save', function(doc, next) {
+//   console.log(doc);
+//   next();
+// });
 
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
+
