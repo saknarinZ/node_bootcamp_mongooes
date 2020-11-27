@@ -73,5 +73,5 @@ npm i slugify
 mongoDB_v21
 Query Middleware
 
-mongoDB_v21
+mongoDB_v22
 Aggregation Middleware
