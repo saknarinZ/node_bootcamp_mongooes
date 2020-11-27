@@ -81,3 +81,7 @@ Data Validation: Built-ln Validators
 
 mongoDB_v24
 Data Validation: Custom Validators
+
+```
+npm i validator
+```
