@@ -71,4 +71,4 @@ Document Middleware
 npm i slugify
 ```
 mongoDB_v21
-Document Middleware
+Query Middleware
