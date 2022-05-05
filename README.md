@@ -36,6 +36,9 @@ Modelling the Tours
 mongoDB_v10
 Importing Development Data
 
+node dev-data/data/import-dev-data.js --delete
+node dev-data/data/import-dev-data.js --import
+
 mongoDB_v11
 Making the API Better:Filering
 Making the API Better:Advanecd Filtering
