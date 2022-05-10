@@ -10,7 +10,7 @@ exports.getAllTours = async (req, res) => {
         //BUILD QUERY
         //1A) Filtering
         const queryObj = { ...req.query };
-        const excludedFields = ['page', 'sort', 'limit', 'fields'];
+        const excludedFields = ['page', 'sort', 'limit', 'fields']; // ค้นหา  
         excludedFields.forEach(el => delete queryObj[el]);
 
         //1B) Advaned filering
