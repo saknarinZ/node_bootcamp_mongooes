@@ -105,6 +105,9 @@ Handling Invalid Database IDs
 mongoDB_v31
 Handling Duplicate Database Fields
 
+mongoDB_v32
+Handling Mongoose Validation Errors
+
 ```
 npm i validator
 ```
