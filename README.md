@@ -102,6 +102,9 @@ Errors During Development vs Production
 mongoDB_v30
 Handling Invalid Database IDs
 
+mongoDB_v31
+Handling Duplicate Database Fields
+
 ```
 npm i validator
 ```
