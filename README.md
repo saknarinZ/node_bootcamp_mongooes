@@ -86,6 +86,9 @@ mongoDB_v25
 Handling Unhandled routes
 npm i ndb --save-dev
 
+mongoDB_v26
+Implementing a Global Error Handling Middleware
+
 ```
 npm i validator
 ```
