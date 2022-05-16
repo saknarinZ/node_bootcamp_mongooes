@@ -1,6 +1,7 @@
 const express = require('express');
+const { request } = require('../app');
 const tourController = require('./../controllers/tourController')
-
+// const catchAsync = require('./../utils/catchAsync')
 const router = express.Router();
 
 // router.param('id', tourController.checkID );

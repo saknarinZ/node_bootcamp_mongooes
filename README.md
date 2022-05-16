@@ -96,6 +96,12 @@ Catching Errors in Async Functions
 mongoDB_v28
 Adding 404 Not Found Errors
 
+mongoDB_v29
+Errors During Development vs Production
+
+mongoDB_v30
+Handling Invalid Database IDs
+
 ```
 npm i validator
 ```
