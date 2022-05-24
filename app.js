@@ -8,46 +8,27 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
-
-
 // 1) MIDDLEWARES
-if(process.env.NODE_ENV === 'development'){
-    app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
 }
 
 app.use(express.json());
-app.use(express.static(`${__dirname}/public`))
+app.use(express.static(`${__dirname}/public`));
 
-app.use((req, res, next)=>{
-    console.log('Hello from the middleware 👋');
-    next()
-})
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
-app.use((req, res, next)=>{
-    req.requestTime = new Date().toISOString();
-    next();
-})
-
-
-// 2)  ROUTES
+// 3) ROUTES
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 
-app.all('*', (req, res ,next) => {    
-    next(new AppError(`Can't find ${req.originalUrl} on this server!`));
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-// app.use((err, req, res, next) => {
-//     err.statusCode = err.statusCode || 500;
-//     err.status = err.status || 'error'
-
-//     res.status(err.statusCode).json({
-//         status: err.status,
-//         message: err.message
-//     });
-// });
-
-app.use(globalErrorHandler)
-
+app.use(globalErrorHandler);
 
 module.exports = app;
